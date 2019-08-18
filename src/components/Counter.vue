@@ -11,7 +11,7 @@
         <button :disabled="loading" class="bigPlus" @click="addBeer(`${name}`,1)">+</button>
       </div>
     </div>
-    <h1>Total 🍺: {{totalMass}}</h1>
+    <h1>Total 🍺: {{totalMass}}!</h1>
   </div>
 </template>
 
