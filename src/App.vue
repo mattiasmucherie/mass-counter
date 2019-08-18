@@ -1,17 +1,16 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <Counter />
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import Counter from "./components/Counter.vue";
 
 export default {
   name: "app",
   components: {
-    HelloWorld
+    Counter
   }
 };
 </script>
@@ -23,6 +22,17 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin: 0;
+}
+body {
+  margin: 0 0;
+  padding: 0 0;
+  background: rgb(0, 155, 208);
+  background: linear-gradient(
+    45deg,
+    rgba(0, 155, 208, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  height: 100vh;
 }
 </style>
