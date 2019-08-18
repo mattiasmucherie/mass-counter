@@ -6,7 +6,7 @@
     </h1>
     <div v-if="!initialLoading" class="names-container">
       <div class="name-container" v-for="person in listOfNames" v-bind:key="person.name">
-        <span class="name">{{person.name}}</span>
+        <span class="name" @dblclick="removeBeer(person.name)">{{person.name}}</span>
         <span class="numBeer">{{person.numBeer}}</span>
         <button :disabled="loading" class="smallPlus" @click="addBeer(`${person.name}`,0.5)">+</button>
         <button :disabled="loading" class="bigPlus" @click="addBeer(`${person.name}`,1)">+</button>
@@ -52,6 +52,25 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    removeBeer(user) {
+      const objIndex = this.listOfNames.findIndex(obj => obj.name == user);
+      if (this.listOfNames[objIndex].numBeer > 0) {
+        this.loading = true;
+        const ref = db.collection("mass").doc(`${user}`);
+        ref
+          .update({
+            numBeer: firebase.firestore.FieldValue.increment(-1)
+          })
+          .then(() => {
+            this.listOfNames[objIndex].numBeer--;
+            this.loading = false;
+            this.totalMass--;
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
     },
     fetchMass() {
       this.totalMass = 0;
@@ -105,16 +124,17 @@ h1 {
 }
 button {
   border: none;
-  background: none;
-  color: #dc821a;
+  background: rgba(220, 130, 26, 0.8);
+  color: #fff;
   font-size: 2rem;
   cursor: pointer;
-  border: 2px solid #dc821a;
   border-radius: 1rem;
   margin: 0.1rem;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 2px 4px 0 rgba(14, 30, 37, 0.12);
   &:disabled {
-    color: #aaa;
-    border: 2px solid #aaa;
+    color: #fff;
+    background: rgba(170, 170, 170, 0.7);
   }
 }
 .smallPlus {
