@@ -5,11 +5,32 @@
       <span class="cling-beer">🍻</span>
     </h1>
     <div v-if="!initialLoading" class="names-container">
+      <div class="header-container">
+        <span class="tinyPlus">0.33</span>
+        <span class="smallPlus">0.5</span>
+        <span class="bigPlus">1</span>
+      </div>
       <div class="name-container" v-for="person in listOfNames" v-bind:key="person.name">
         <span class="name" @dblclick="removeBeer(person.name)">{{person.name}}</span>
         <span class="numBeer">{{person.numBeer}}</span>
-        <button :disabled="loading" class="smallPlus" @click="addBeer(`${person.name}`,0.5)">+</button>
-        <button :disabled="loading" class="bigPlus" @click="addBeer(`${person.name}`,1)">+</button>
+        <button
+          :disabled="loading"
+          class="tinyPlus"
+          style="font-size:0.5rem"
+          @click="addBeer(`${person.name}`,0.33)"
+        >+</button>
+        <button
+          :disabled="loading"
+          class="smallPlus"
+          style="font-size:1rem"
+          @click="addBeer(`${person.name}`,0.5)"
+        >+</button>
+        <button
+          :disabled="loading"
+          class="bigPlus"
+          style="font-size:2rem"
+          @click="addBeer(`${person.name}`,1)"
+        >+</button>
       </div>
     </div>
     <h1 v-if="!initialLoading">Total: {{totalMass}} 🍺</h1>
@@ -106,9 +127,13 @@ h1 {
 .title {
   padding: 3rem;
 }
+.header-container {
+  display: grid;
+  grid-template-columns: auto 100px 50px 50px 50px 50px auto;
+}
 .name-container {
   display: grid;
-  grid-template-columns: auto 100px 50px 50px 50px auto;
+  grid-template-columns: auto 100px 50px 50px 50px 50px auto;
 }
 .name {
   grid-column-start: 2;
@@ -137,15 +162,20 @@ button {
     background: rgba(170, 170, 170, 0.7);
   }
 }
-.smallPlus {
+.tinyPlus {
   grid-column-start: 4;
   grid-column-end: 5;
-  font-size: 1rem;
+  font-weight: 800;
 }
-.bigPlus {
+.smallPlus {
   grid-column-start: 5;
   grid-column-end: 6;
-  font-size: 2rem;
+  font-weight: 800;
+}
+.bigPlus {
+  grid-column-start: 6;
+  grid-column-end: 7;
+  font-weight: 800;
 }
 .spinner {
   font-size: 124px;
