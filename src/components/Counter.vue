@@ -4,39 +4,41 @@
       Maß Counter
       <span class="cling-beer">🍻</span>
     </h1>
-    <div v-if="!initialLoading" class="names-container">
-      <div class="header-container">
-        <span class="tinyPlus">0.33</span>
-        <span class="smallPlus">0.5</span>
-        <span class="bigPlus">1</span>
+    <div v-if="!initialLoading">
+      <div class="names-container">
+        <div class="header-container">
+          <span class="tinyPlus">0.33</span>
+          <span class="smallPlus">0.5</span>
+          <span class="bigPlus">1</span>
+        </div>
+        <div class="name-container" v-for="person in listOfNames" v-bind:key="person.name">
+          <span class="name" @dblclick="removeBeer(person.name)">{{person.name}}</span>
+          <span class="numBeer">{{person.numBeer.toFixed(1)}}</span>
+          <button
+            :disabled="loading"
+            class="tinyPlus"
+            style="font-size:0.5rem"
+            @click="addBeer(`${person.name}`,0.33)"
+          >+</button>
+          <button
+            :disabled="loading"
+            class="smallPlus"
+            style="font-size:1rem"
+            @click="addBeer(`${person.name}`,0.5)"
+          >+</button>
+          <button
+            :disabled="loading"
+            class="bigPlus"
+            style="font-size:2rem"
+            @click="addBeer(`${person.name}`,1)"
+          >+</button>
+        </div>
       </div>
-      <div class="name-container" v-for="person in listOfNames" v-bind:key="person.name">
-        <span class="name" @dblclick="removeBeer(person.name)">{{person.name}}</span>
-        <span class="numBeer">{{person.numBeer}}</span>
-        <button
-          :disabled="loading"
-          class="tinyPlus"
-          style="font-size:0.5rem"
-          @click="addBeer(`${person.name}`,0.33)"
-        >+</button>
-        <button
-          :disabled="loading"
-          class="smallPlus"
-          style="font-size:1rem"
-          @click="addBeer(`${person.name}`,0.5)"
-        >+</button>
-        <button
-          :disabled="loading"
-          class="bigPlus"
-          style="font-size:2rem"
-          @click="addBeer(`${person.name}`,1)"
-        >+</button>
-      </div>
+      <h1>Total: {{totalMass.toFixed(1)}} 🍺</h1>
     </div>
-    <h1 v-if="!initialLoading">Total: {{totalMass}} 🍺</h1>
     <div v-else>
       <span class="spinner">🍺</span>
-      <p>Loading</p>
+      <p>Loading...</p>
     </div>
   </div>
 </template>
