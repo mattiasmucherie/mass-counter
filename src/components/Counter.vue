@@ -7,19 +7,13 @@
     <div v-if="!initialLoading">
       <div class="names-container">
         <div class="header-container">
-          <span class="tinyPlus">0.33</span>
           <span class="smallPlus">0.5</span>
           <span class="bigPlus">1</span>
         </div>
         <div class="name-container" v-for="person in listOfNames" v-bind:key="person.name">
           <span class="name" @dblclick="removeBeer(person.name, person.numBeer)">{{person.name}}</span>
           <span class="numBeer">{{person.numBeer.toFixed(1)}}</span>
-          <button
-            :disabled="loading"
-            class="tinyPlus"
-            style="font-size:0.5rem"
-            @click="addBeer(`${person.name}`,0.33)"
-          >+</button>
+
           <button
             :disabled="loading"
             class="smallPlus"
@@ -38,12 +32,6 @@
       <div class="name-container">
         <span class="name" @dblclick="removeBeer('Guest', guest.numBeer)">Guest</span>
         <span class="numBeer">{{guest.numBeer}}</span>
-        <button
-          :disabled="loading"
-          class="tinyPlus"
-          style="font-size:0.5rem"
-          @click="addBeer(`Guest`,0.33)"
-        >+</button>
         <button
           :disabled="loading"
           class="smallPlus"
@@ -167,11 +155,11 @@ h1 {
 }
 .header-container {
   display: grid;
-  grid-template-columns: auto 100px 50px 50px 50px 50px auto;
+  grid-template-columns: auto 100px 50px 50px 50px auto;
 }
 .name-container {
   display: grid;
-  grid-template-columns: auto 100px 50px 50px 50px 50px auto;
+  grid-template-columns: auto 100px 50px 50px 50px auto;
 }
 .name {
   grid-column-start: 2;
@@ -200,19 +188,15 @@ button {
     background: rgba(170, 170, 170, 0.7);
   }
 }
-.tinyPlus {
+
+.smallPlus {
   grid-column-start: 4;
   grid-column-end: 5;
   font-weight: 800;
 }
-.smallPlus {
+.bigPlus {
   grid-column-start: 5;
   grid-column-end: 6;
-  font-weight: 800;
-}
-.bigPlus {
-  grid-column-start: 6;
-  grid-column-end: 7;
   font-weight: 800;
 }
 .spinner {
