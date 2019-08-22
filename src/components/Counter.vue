@@ -12,7 +12,7 @@
           <span class="bigPlus">1</span>
         </div>
         <div class="name-container" v-for="person in listOfNames" v-bind:key="person.name">
-          <span class="name" @dblclick="removeBeer(person.name)">{{person.name}}</span>
+          <span class="name" @dblclick="removeBeer(person.name, person.numBeer)">{{person.name}}</span>
           <span class="numBeer">{{person.numBeer.toFixed(1)}}</span>
           <button
             :disabled="loading"
@@ -35,6 +35,28 @@
         </div>
       </div>
       <h1>Total: {{totalMass.toFixed(1)}} 🍺</h1>
+      <div class="name-container">
+        <span class="name" @dblclick="removeBeer('Guest', guest.numBeer)">Guest</span>
+        <span class="numBeer">{{guest.numBeer}}</span>
+        <button
+          :disabled="loading"
+          class="tinyPlus"
+          style="font-size:0.5rem"
+          @click="addBeer(`Guest`,0.33)"
+        >+</button>
+        <button
+          :disabled="loading"
+          class="smallPlus"
+          style="font-size:1rem"
+          @click="addBeer(`Guest`,0.5)"
+        >+</button>
+        <button
+          :disabled="loading"
+          class="bigPlus"
+          style="font-size:2rem"
+          @click="addBeer(`Guest`,1)"
+        >+</button>
+      </div>
     </div>
     <div v-else>
       <span class="spinner">🍺</span>
@@ -52,6 +74,7 @@ export default {
   data() {
     return {
       listOfNames: [],
+      guest: {},
       loading: false,
       initialLoading: false,
       totalMass: 0
@@ -68,17 +91,23 @@ export default {
           time: firebase.firestore.FieldValue.arrayUnion(Date.now())
         })
         .then(() => {
-          this.listOfNames[objIndex].numBeer += amount;
-          this.loading = false;
+          console.log(user, amount);
+          if (user === "Guest") {
+            this.guest.numBeer += amount;
+            this.loading = false;
+          } else {
+            this.listOfNames[objIndex].numBeer += amount;
+            this.loading = false;
+          }
           this.totalMass += amount;
         })
         .catch(err => {
           console.log(err);
         });
     },
-    removeBeer(user) {
+    removeBeer(user, amount) {
       const objIndex = this.listOfNames.findIndex(obj => obj.name == user);
-      if (this.listOfNames[objIndex].numBeer > 0) {
+      if (amount >= 1) {
         this.loading = true;
         const ref = db.collection("mass").doc(`${user}`);
         ref
@@ -86,8 +115,13 @@ export default {
             numBeer: firebase.firestore.FieldValue.increment(-1)
           })
           .then(() => {
-            this.listOfNames[objIndex].numBeer--;
-            this.loading = false;
+            if (user === "Guest") {
+              this.guest.numBeer--;
+              this.loading = false;
+            } else {
+              this.listOfNames[objIndex].numBeer--;
+              this.loading = false;
+            }
             this.totalMass--;
           })
           .catch(err => {
@@ -107,6 +141,8 @@ export default {
               numBeer: doc.data().numBeer
             });
             this.totalMass += doc.data().numBeer;
+          } else if (doc.id === "Guest") {
+            this.guest = { name: doc.id, numBeer: doc.data().numBeer };
           }
         });
         this.initialLoading = false;
@@ -123,7 +159,7 @@ export default {
 <style scoped lang="scss">
 h1 {
   margin: 0 0;
-  padding-top: 2rem;
+  padding: 2rem 0;
 }
 
 .title {
