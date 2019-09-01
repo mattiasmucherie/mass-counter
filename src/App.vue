@@ -16,8 +16,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import url("https://fonts.googleapis.com/css?family=Germania+One&display=swap");
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: "Germania One", "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -29,11 +30,12 @@ body {
   padding: 0 0;
   background: rgb(0, 155, 208);
   background: linear-gradient(
-    45deg,
+    225deg,
     rgba(0, 155, 208, 1) 0%,
     rgba(255, 255, 255, 1) 100%
   );
-  height: 100vh;
+  min-height: 100vh;
+  width: 100vw;
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */
