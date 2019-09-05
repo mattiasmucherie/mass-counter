@@ -40,10 +40,28 @@ export default new Vuex.Store({
     ADD_MASS_TO_PERSON(state, { person, amount }) {
       const objIndex = state.listOfNames.findIndex(obj => obj.name == person);
       state.listOfNames[objIndex].numBeer += amount;
+      state.listOfNames[objIndex].beer8 += amount;
     },
     REMOVE_MASS_TO_PERSON(state, { person }) {
       const objIndex = state.listOfNames.findIndex(obj => obj.name == person);
       state.listOfNames[objIndex].numBeer -= 1;
+      state.listOfNames[objIndex].beer8 -= 1;
+    },
+    BEER_LAST_EIGHT_HOURS(state) {
+      try {
+        state.listOfNames.forEach(obj => {
+          obj.time.forEach(timeObj => {
+            if (Date.now() - timeObj.time < 43200000) {
+              const objIndex = state.listOfNames.findIndex(
+                objI => objI.name == obj.name
+              );
+              state.listOfNames[objIndex].beer8 += timeObj.amount;
+            }
+          });
+        });
+      } catch (err) {
+        console.log(err);
+      }
     }
   },
   actions: {
@@ -54,6 +72,7 @@ export default new Vuex.Store({
       commit("SET_LOADING", true);
       await dispatch("fetchMassData");
       commit("ORDER_LIST_OF_NAME");
+      commit("BEER_LAST_EIGHT_HOURS");
       commit("SET_LOADING", false);
       console.log("fetched DAta");
     },
@@ -66,7 +85,9 @@ export default new Vuex.Store({
             snap.forEach(doc => {
               commit("ADD_PERSON_TO_LIST", {
                 name: doc.id,
-                numBeer: doc.data().numBeer
+                numBeer: doc.data().numBeer,
+                time: doc.data().time,
+                beer8: 0
               });
               if (doc.id !== "Guest") {
                 commit("ADD_TO_MASS", doc.data().numBeer);

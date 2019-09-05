@@ -8,9 +8,15 @@
       <div class="name-container">
         <span class="smallPlus">0.5</span>
         <span class="bigPlus">1</span>
+        <span class="beer8">&lt; 8h</span>
       </div>
       <div v-for="(person, index) in listOfNames" v-bind:key="`${person.name}${index}`">
-        <Person v-if="person.name != 'Guest'" v-bind:name="person.name" :numBeer="person.numBeer"></Person>
+        <Person
+          v-if="person.name != 'Guest'"
+          :name="person.name"
+          :numBeer="person.numBeer"
+          :beer8="person.beer8"
+        ></Person>
       </div>
       <h1 class="total">Total: {{totalMass.toFixed(1)}} 🍺</h1>
       <div v-for="person in listOfNames" v-bind:key="person.name">

@@ -18,6 +18,7 @@
       style="font-size:2rem"
       @click="addMassOnePerson({person:`${name}`,amount:1})"
     >+</button>
+    <span v-if="beer8 != 0" class="beer8">{{ beer8 }}</span>
   </div>
 </template>
 
@@ -26,7 +27,7 @@ import { mapState, mapActions } from "vuex";
 
 export default {
   name: "Person",
-  props: ["name", "numBeer"],
+  props: ["name", "numBeer", "beer8"],
   data() {
     return {};
   },
@@ -44,13 +45,13 @@ export default {
 @media (min-width: 1281px) {
   .name-container {
     display: grid;
-    grid-template-columns: auto 100px 50px 50px 50px auto;
+    grid-template-columns: auto 100px 50px 50px 50px 50px auto;
   }
 }
 @media (max-width: 1281px) {
   .name-container {
     display: grid;
-    grid-template-columns: auto 25% 20% 10% 10% auto;
+    grid-template-columns: auto 25% 20% 10% 10% 10% auto;
   }
 }
 .name {
@@ -92,5 +93,12 @@ button {
   grid-column-start: 5;
   grid-column-end: 6;
   font-weight: 800;
+}
+.beer8 {
+  grid-column-start: 6;
+  grid-column-end: 7;
+  font-weight: 800;
+  text-align: right;
+  align-self: center;
 }
 </style>
