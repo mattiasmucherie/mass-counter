@@ -14,6 +14,7 @@ export default new Vuex.Store({
   },
   getters: {},
   mutations: {
+    // sets the loading state
     SET_LOADING(state, status) {
       state.loading = status;
     },
@@ -51,7 +52,7 @@ export default new Vuex.Store({
       try {
         state.listOfNames.forEach(obj => {
           obj.time.forEach(timeObj => {
-            if (Date.now() - timeObj.time < 43200000) {
+            if (Date.now() - timeObj.time < 86400000) {
               const objIndex = state.listOfNames.findIndex(
                 objI => objI.name == obj.name
               );

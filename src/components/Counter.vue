@@ -8,7 +8,7 @@
       <div class="name-container">
         <span class="smallPlus">0.5</span>
         <span class="bigPlus">1</span>
-        <span class="beer8">&lt; 8h</span>
+        <span class="beer8">&lt; 24h</span>
       </div>
       <div v-for="(person, index) in listOfNames" v-bind:key="`${person.name}${index}`">
         <Person
