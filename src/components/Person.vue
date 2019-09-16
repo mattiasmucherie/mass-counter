@@ -44,19 +44,27 @@ export default {
 </script>
 
 <style lang="scss">
-// @media (min-width: 1281px) {
-//   .name-container {
-//     display: grid;
-//     grid-template-columns: auto 100px 50px 50px 50px 50px auto;
-//   }
-// }
-@media (max-width: 1281px) {
-  .name-container {
-  }
+.name-container {
+  padding: 0.5rem;
+  margin: 0.2rem;
+  display: grid;
+  grid-template-columns: auto 45% 25% 20% auto;
+  grid-template-areas: " . names numBeer beer8 .";
 }
+
 .name {
+  grid-area: names;
+  text-align: left;
+  font-size: 1.2rem;
 }
 .numBeer {
+  grid-area: numBeer;
+  text-align: center;
+  font-size: 1.1rem;
+}
+.beer8 {
+  grid-area: beer8;
+  text-align: right;
 }
 button {
   &:disabled {
@@ -68,6 +76,4 @@ button {
 // .bigPlus {
 
 // }
-.beer8 {
-}
 </style>

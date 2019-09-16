@@ -1,14 +1,15 @@
 <template>
   <div class="container">
-    <h1 class="title">
+    <h1 :class="{title: !loading}">
       Maß Counter
       <span :class="{clingBeer: beerLoading}">🍻</span>
     </h1>
     <div v-if="!loading" class="leaderboard-container">
-      <div class="name-container">
-        <span class="smallPlus">0.5</span>
-        <span class="bigPlus">1</span>
-        <span class="beer8">&lt; 24h</span>
+      <div class="leaderboard-header">
+        <div class="name-container">
+          <span class="numBeer">Total (L)</span>
+          <span class="beer8">&lt; 24h</span>
+        </div>
       </div>
       <div v-for="(person, index) in listOfNames" v-bind:key="`${person.name}${index}`">
         <!-- When you click on a person, you should get the option to add/remove beers and get the log of the beers that you have had -->
@@ -63,8 +64,32 @@ export default {
 .container {
   margin: 0 auto;
   padding: 1rem;
-  width: 80%;
+  width: 70%;
 }
+@media (min-width: 640px) {
+  .container {
+    width: 50%;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 40%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    width: 35%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 25%;
+  }
+}
+
 .leaderboard-container {
   display: -webkit-box;
   display: -moz-box;
@@ -73,9 +98,55 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  .leaderboard-header {
+    background: linear-gradient(to bottom, #142930, #091114);
+    color: white;
+  }
+  div:nth-child(2) {
+    background: #009bd0;
+  }
+  div:nth-child(3) {
+    background: #0897c8;
+  }
+  div:nth-child(4) {
+    background: #1093c0;
+  }
+  div:nth-child(5) {
+    background: #188fb8;
+  }
+  div:nth-child(6) {
+    background: #208bb0;
+  }
+  div:nth-child(7) {
+    background: #2887a8;
+  }
+  div:nth-child(8) {
+    background: #3083a0;
+  }
+  div:nth-child(9) {
+    background: #388098;
+  }
+  div:nth-child(11) {
+    background: #407c90;
+  }
+  div:nth-child(12) {
+    background: #487888;
+    border-radius: 0 0 10px 10px;
+  }
 }
 
 .title {
+  padding: 1rem 0.3rem 1rem 0.3rem;
+  font-size: 2.2rem;
+  background: white;
+  margin: 0;
+  margin-top: 1rem;
+  background: linear-gradient(to bottom, #21434f, #142930);
+  border-radius: 15px 15px 0px 0px;
+  color: white;
+}
+.total {
+  font-size: 2.3rem;
 }
 
 .spinner {

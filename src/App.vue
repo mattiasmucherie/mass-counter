@@ -25,15 +25,16 @@ export default {
   color: #002b39;
   margin: 0;
   padding: 0;
+  min-height: 100vh;
 }
 body {
   margin: 0 0;
   padding: 0;
-  background: rgb(0, 155, 208);
-  background: linear-gradient(
-    225deg,
-    rgba(0, 155, 208, 1) 0%,
-    rgba(255, 255, 255, 1) 100%
+  background: #009bd0;
+  background: radial-gradient(
+    ellipse farthest-corner at center,
+    #ffffff 0%,
+    #009bd0 100%
   );
   min-height: 100vh;
   -webkit-user-select: none; /* Safari */
