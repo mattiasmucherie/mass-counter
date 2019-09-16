@@ -75,7 +75,6 @@ export default new Vuex.Store({
       commit("ORDER_LIST_OF_NAME");
       commit("BEER_LAST_EIGHT_HOURS");
       commit("SET_LOADING", false);
-      console.log("fetched DAta");
     },
     fetchMassData({ commit }) {
       return new Promise((res, rej) => {

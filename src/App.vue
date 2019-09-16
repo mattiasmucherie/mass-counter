@@ -24,10 +24,11 @@ export default {
   text-align: center;
   color: #002b39;
   margin: 0;
+  padding: 0;
 }
 body {
   margin: 0 0;
-  padding: 0 0;
+  padding: 0;
   background: rgb(0, 155, 208);
   background: linear-gradient(
     225deg,
@@ -35,7 +36,6 @@ body {
     rgba(255, 255, 255, 1) 100%
   );
   min-height: 100vh;
-  width: 100vw;
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */

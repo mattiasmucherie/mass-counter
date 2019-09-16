@@ -4,13 +4,14 @@
       Maß Counter
       <span :class="{clingBeer: beerLoading}">🍻</span>
     </h1>
-    <div v-if="!loading">
+    <div v-if="!loading" class="leaderboard-container">
       <div class="name-container">
         <span class="smallPlus">0.5</span>
         <span class="bigPlus">1</span>
         <span class="beer8">&lt; 24h</span>
       </div>
       <div v-for="(person, index) in listOfNames" v-bind:key="`${person.name}${index}`">
+        <!-- When you click on a person, you should get the option to add/remove beers and get the log of the beers that you have had -->
         <Person
           v-if="person.name != 'Guest'"
           :name="person.name"
@@ -59,13 +60,22 @@ export default {
 </script>
 
 <style lang="scss">
-h1 {
-  margin: 0 0;
-  padding: 2rem 0;
+.container {
+  margin: 0 auto;
+  padding: 1rem;
+  width: 80%;
+}
+.leaderboard-container {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .title {
-  padding: 2.5;
 }
 
 .spinner {
