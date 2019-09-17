@@ -101,16 +101,16 @@ export default {
   align-items: center;
   button {
     border: none;
-    flex-direction: column;
     width: 50px;
     height: 50px;
     background: rgba(220, 130, 26, 1);
     color: #fff;
     font-size: 1.5rem;
     border-radius: 1rem;
-    margin: 0.1rem;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     font-family: inherit;
+    text-align: center;
+
     .smallPlus {
       font-size: 1rem;
     }
