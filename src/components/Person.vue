@@ -66,14 +66,4 @@ export default {
   grid-area: beer8;
   text-align: right;
 }
-button {
-  &:disabled {
-  }
-}
-// .smallPlus {
-
-// }
-// .bigPlus {
-
-// }
 </style>
