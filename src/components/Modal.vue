@@ -84,12 +84,12 @@ export default {
   }
 }
 .modal-header {
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: 1px solid #eee;
   color: #002b39;
   justify-content: space-between;
 }
 .modal-footer {
-  border-top: 1px solid #eeeeee;
+  border-top: 1px solid #eee;
   justify-content: flex-end;
   padding: 0.5rem;
 }
@@ -110,7 +110,7 @@ export default {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     font-family: inherit;
     text-align: center;
-
+    padding: 0;
     .smallPlus {
       font-size: 1rem;
     }
@@ -134,8 +134,8 @@ export default {
 .btn-green {
   width: 50px;
   height: 50px;
-  color: white;
-  background: #4aae9b;
+  color: #091114;
+  background: transparent;
   border-radius: 1rem;
   font-family: inherit;
   border: none;

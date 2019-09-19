@@ -56,7 +56,7 @@ export default {
 .container {
   margin: 0 auto;
   padding: 2rem 0 1rem 0;
-  width: 90%;
+  width: 85%;
 }
 @media (min-width: 640px) {
   .container {
@@ -90,42 +90,43 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+
   .leaderboard-header {
-    background: linear-gradient(to bottom, #142930, #091114);
-    color: #e4f8ff;
+    background: #003547;
+    color: #eee;
   }
   div:nth-child(2) {
-    background: #009bd0;
+    background: #f7fdff;
   }
   div:nth-child(3) {
-    background: #0897c8;
+    background: #e4f8ff;
   }
   div:nth-child(4) {
-    background: #1093c0;
+    background: #d0f3ff;
   }
   div:nth-child(5) {
-    background: #188fb8;
+    background: #bceeff;
   }
   div:nth-child(6) {
-    background: #208bb0;
+    background: #a9e9ff;
   }
   div:nth-child(7) {
-    background: #2887a8;
+    background: #95e4ff;
   }
   div:nth-child(8) {
-    background: #3083a0;
+    background: #82dfff;
   }
   div:nth-child(9) {
-    background: #388098;
+    background: #6edaff;
   }
   div:nth-child(10) {
-    background: #407c90;
+    background: #5ad5ff;
   }
   div:nth-child(11) {
-    background: #487888;
+    background: #47d0ff;
   }
   div:nth-child(12) {
-    background: #507480;
+    background: #33cbff;
     border-radius: 0 0 10px 10px;
   }
 }
@@ -134,9 +135,9 @@ export default {
   padding: 1rem 0.3rem 1rem 0.3rem;
   font-size: 2.2rem;
   margin: 0;
-  background: linear-gradient(to bottom, #21434f, #142930);
+  background: #003547;
   border-radius: 15px 15px 0px 0px;
-  color: #e4f8ff;
+  color: #eee;
 }
 .total {
   font-size: 2.3rem;
