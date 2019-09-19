@@ -26,7 +26,14 @@
           >-1</button>
         </section>
         <footer class="modal-footer">
-          <button type="button" class="btn-green" @click="close">&times;</button>
+          <button type="button" class="btn-green" @click="getLog">Show Log</button>
+          <div class="log-container" v-if="showLog">
+            <div
+              class="log-items"
+              v-for=" (log, index) in logList"
+              :key="index"
+            >Amount: {{log.amount}}, Time: {{getDate(log.time)}}</div>
+          </div>
         </footer>
       </div>
     </div>
@@ -39,17 +46,37 @@ export default {
   name: "Modal",
   props: ["name", "numBeer", "beer8"],
   data() {
-    return {};
+    return {
+      showLog: false,
+      logList: []
+    };
   },
   methods: {
     ...mapActions(["addMassOnePerson"]),
     ...mapActions(["removeMassOnePerson"]),
     close() {
       this.$emit("close");
+      this.showLog = false;
+      this.logList = [];
+    },
+    getLog() {
+      this.showLog = !this.showLog;
+      const objIndex = this.listOfNames.findIndex(obj => obj.name == this.name);
+      this.logList = this.listOfNames[objIndex].time.reverse();
+    },
+    getDate(date) {
+      let minutes = new Date(date).getMinutes();
+      minutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+      const hours = new Date(date).getHours();
+      const day = new Date(date).getDate();
+      const month = new Date(date).getMonth();
+      const year = new Date(date).getYear() + 1900;
+
+      return `${hours}:${minutes} ${day}/${month + 1}/${year}`;
     }
   },
   computed: {
-    ...mapState(["beerLoading"])
+    ...mapState(["beerLoading", "listOfNames"])
   }
 };
 </script>
@@ -69,7 +96,7 @@ export default {
 .modal {
   background: #e4f8ff;
   box-shadow: 2px 2px 2px 2px;
-  overflow-x: auto;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   border-radius: 1rem;
@@ -92,6 +119,14 @@ export default {
   border-top: 1px solid #eee;
   justify-content: flex-end;
   padding: 0.5rem;
+  .log-container {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  .log-items {
+    background: #e4f8ff !important;
+    padding: 0.2rem;
+  }
 }
 .modal-body {
   position: relative;
@@ -132,7 +167,7 @@ export default {
   background: transparent;
 }
 .btn-green {
-  width: 50px;
+  width: 200px;
   height: 50px;
   color: #091114;
   background: transparent;
