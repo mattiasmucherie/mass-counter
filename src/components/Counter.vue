@@ -9,10 +9,16 @@
         <div class="name-container">
           <span class="numBeer">Total (L)</span>
           <span class="beer8">&lt; 24h</span>
+          <span class="daysSober">🥤</span>
         </div>
       </div>
       <div v-for="(person, index) in listOfNames" v-bind:key="`${person.name}${index}`">
-        <Person :name="person.name" :numBeer="person.numBeer" :beer8="person.beer8"></Person>
+        <Person
+          :name="person.name"
+          :numBeer="person.numBeer"
+          :beer8="person.beer8"
+          :lastBeer="person.time"
+        ></Person>
       </div>
       <h1 class="total">Total: {{totalMass.toFixed(1)}} 🍺</h1>
     </div>

@@ -3,6 +3,7 @@
     <span class="name" @click="showModal">{{name}}</span>
     <span class="numBeer">{{numBeer.toFixed(1)}}</span>
     <span v-if="beer8 != 0" class="beer8">{{ beer8 }}</span>
+    <span class="daysSober">{{daysSober}}</span>
     <Modal
       :numBeer="numBeer"
       :beer8s="beer8"
@@ -21,14 +22,18 @@ export default {
   components: {
     Modal
   },
-  props: ["name", "numBeer", "beer8"],
+  props: ["name", "numBeer", "beer8", "lastBeer"],
   data() {
     return {
       isModalVisible: false
     };
   },
   computed: {
-    ...mapState(["beerLoading"])
+    ...mapState(["beerLoading"]),
+    daysSober() {
+      const msSince = new Date() - this.lastBeer[this.lastBeer.length - 1].time;
+      return new Date(msSince).getDate() - 1;
+    }
   },
   methods: {
     ...mapActions(["addMassOnePerson"]),
@@ -39,7 +44,8 @@ export default {
     closeModal() {
       this.isModalVisible = false;
     }
-  }
+  },
+  created() {}
 };
 </script>
 
@@ -48,8 +54,8 @@ export default {
   padding: 0.5rem;
   margin: 0.2rem;
   display: grid;
-  grid-template-columns: auto 45% 25% 20% auto;
-  grid-template-areas: " . names numBeer beer8 .";
+  grid-template-columns: auto 35% 25% 20% 10% auto;
+  grid-template-areas: " . names numBeer beer8 daysSober .";
 }
 
 .name {
@@ -64,6 +70,10 @@ export default {
 }
 .beer8 {
   grid-area: beer8;
+  text-align: center;
+}
+.daysSober {
+  grid-area: daysSober;
   text-align: right;
 }
 </style>

@@ -102,6 +102,29 @@ export default {
   border-radius: 1rem;
   width: 80%;
 }
+@media (min-width: 640px) {
+  .modal {
+    width: 50%;
+  }
+}
+
+@media (min-width: 768px) {
+  .modal {
+    width: 40%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .modal {
+    width: 35%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .modal {
+    width: 25%;
+  }
+}
 .modal-header,
 .modal-footer {
   padding: 1rem;
