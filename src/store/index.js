@@ -37,6 +37,9 @@ export default new Vuex.Store({
       state.listOfNames.sort((a, b) =>
         a.numBeer < b.numBeer ? 1 : b.numBeer < a.numBeer ? -1 : 0
       );
+      const objIndex = state.listOfNames.findIndex(obj => obj.name == "Guest");
+      const guest = state.listOfNames.splice(objIndex, 1);
+      state.listOfNames.push(guest[0]);
     },
     ADD_MASS_TO_PERSON(state, { person, amount }) {
       const objIndex = state.listOfNames.findIndex(obj => obj.name == person);
@@ -76,6 +79,7 @@ export default new Vuex.Store({
       commit("BEER_LAST_EIGHT_HOURS");
       commit("SET_LOADING", false);
     },
+
     fetchMassData({ commit }) {
       return new Promise((res, rej) => {
         const ref = db.collection("mass");
@@ -103,6 +107,7 @@ export default new Vuex.Store({
           });
       });
     },
+
     // Adds the amount to one person and updates store as well
     async addMassOnePerson({ dispatch, commit }, { person, amount }) {
       commit("SET_BEER_LOADING", true);
@@ -110,6 +115,7 @@ export default new Vuex.Store({
       if (person !== "Guest") commit("ADD_TO_MASS", amount);
       await dispatch("addMassOnePersonData", { person, amount });
     },
+
     addMassOnePersonData({ commit }, { person, amount }) {
       return new Promise((res, rej) => {
         const ref = db.collection("mass").doc(`${person}`);
@@ -131,6 +137,7 @@ export default new Vuex.Store({
           });
       });
     },
+
     // Removes a mass to one person and updates store as well
     async removeMassOnePerson(
       { dispatch, commit },
@@ -144,6 +151,7 @@ export default new Vuex.Store({
         await dispatch("removeMassOnePersonData", { person });
       }
     },
+
     removeMassOnePersonData({ commit }, { person }) {
       return new Promise((res, rej) => {
         const ref = db.collection("mass").doc(`${person}`);

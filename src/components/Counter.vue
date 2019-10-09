@@ -12,7 +12,6 @@
         </div>
       </div>
       <div v-for="(person, index) in listOfNames" v-bind:key="`${person.name}${index}`">
-        <!-- When you click on a person, you should get the option to add/remove beers and get the log of the beers that you have had -->
         <Person :name="person.name" :numBeer="person.numBeer" :beer8="person.beer8"></Person>
       </div>
       <h1 class="total">Total: {{totalMass.toFixed(1)}} 🍺</h1>
