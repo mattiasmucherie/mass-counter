@@ -31,8 +31,15 @@ export default {
   computed: {
     ...mapState(["beerLoading"]),
     daysSober() {
-      const msSince = new Date() - this.lastBeer[this.lastBeer.length - 1].time;
-      return new Date(msSince).getDate() - 1;
+      const msSince =
+        new Date() -
+        Math.max.apply(
+          Math,
+          this.lastBeer.map(function(o) {
+            return o.time;
+          })
+        );
+      return (msSince / 1000 / 60 / 60 / 24).toFixed(0);
     }
   },
   methods: {
