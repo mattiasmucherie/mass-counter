@@ -39,7 +39,7 @@ export default {
             return o.time;
           })
         );
-      return (msSince / 1000 / 60 / 60 / 24).toFixed(0);
+      return Math.trunc(msSince / 86400000);
     }
   },
   methods: {
