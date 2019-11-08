@@ -8,7 +8,7 @@
             <span :class="{clingBeer: beerLoading}">🍻</span>
           </h1>
         </header>
-        <section class="modal-body">
+        <!-- <section class="modal-body">
           <button
             :disabled="beerLoading"
             class="smallPlus"
@@ -24,7 +24,7 @@
             class="bigMinus"
             @click="removeMassOnePerson({person:`${name}`, currentNumBeer: numBeer})"
           >-1</button>
-        </section>
+        </section>-->
         <footer class="modal-footer">
           <button type="button" class="btn-green" @click="getLog">Show Log</button>
           <div class="log-container" v-if="showLog">
